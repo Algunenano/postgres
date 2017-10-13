@@ -191,6 +191,9 @@ static const struct
 	{
 		"random_exponential", 3, PGBENCH_RANDOM_EXPONENTIAL
 	},
+	{
+		"pow", 2, PGBENCH_POW
+	},
 	/* keep as last array element */
 	{
 		NULL, 0, 0

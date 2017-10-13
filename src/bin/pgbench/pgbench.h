@@ -75,7 +75,8 @@ typedef enum PgBenchFunction
 	PGBENCH_SQRT,
 	PGBENCH_RANDOM,
 	PGBENCH_RANDOM_GAUSSIAN,
-	PGBENCH_RANDOM_EXPONENTIAL
+	PGBENCH_RANDOM_EXPONENTIAL,
+	PGBENCH_POW
 } PgBenchFunction;
 
 typedef struct PgBenchExpr PgBenchExpr;

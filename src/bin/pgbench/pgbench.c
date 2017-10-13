@@ -1346,6 +1346,7 @@ evalFunc(TState *thread, CState *st,
 		case PGBENCH_MUL:
 		case PGBENCH_DIV:
 		case PGBENCH_MOD:
+		case PGBENCH_POW:
 			{
 				PgBenchValue *lval = &vargs[0],
 						   *rval = &vargs[1];
@@ -1379,6 +1380,10 @@ evalFunc(TState *thread, CState *st,
 
 						case PGBENCH_DIV:
 							setDoubleValue(retval, ld / rd);
+							return true;
+
+						case PGBENCH_POW:
+							setDoubleValue(retval, pow(ld, rd));
 							return true;
 
 						default:
@@ -1440,6 +1445,10 @@ evalFunc(TState *thread, CState *st,
 							else	/* func == PGBENCH_MOD */
 								setIntValue(retval, li % ri);
 
+							return true;
+
+						case PGBENCH_POW:
+							setIntValue(retval, pow(li, ri));
 							return true;
 
 						default:
