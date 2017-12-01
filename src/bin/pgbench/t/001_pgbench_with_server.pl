@@ -231,7 +231,14 @@ pgbench(
 		qr{command=18.: double 18\b},
 		qr{command=19.: double 19\b},
 		qr{command=20.: double 20\b},
-		qr{command=21.: int 9223372036854775807\b}, ],
+		qr{command=21.: int 9223372036854775807\b},
+		qr{command=23.: int -27\b},
+		qr{command=24.: double 1024\b},
+		qr{command=25.: int 1\b},
+		qr{command=26.: double 1\b},
+		qr{command=27.: double -0.125\b},
+		qr{command=28.: double -0.125\b},
+        ],
 	'pgbench expressions',
 	{   '001_pgbench_expressions' => q{-- integer functions
 \set i1 debug(random(1, 100))
@@ -261,6 +268,13 @@ pgbench(
 \set maxint debug(:minint - 1)
 -- reset a variable
 \set i1 0
+--- pow() operator
+\set poweri debug(pow(-3,3))
+\set powerd debug(pow(2.0,10))
+\set poweriz debug(pow(0,0))
+\set powerdz debug(pow(0.0,0.0))
+\set powernegi debug(pow(-2,-3))
+\set powernegd debug(pow(-2.0,-3.0))
 } });
 
 # backslash commands

@@ -1099,6 +1099,13 @@ pgbench <optional> <replaceable>options</replaceable> </optional> <replaceable>d
        <entry><literal>sqrt(2.0)</literal></entry>
        <entry><literal>1.414213562</literal></entry>
       </row>
+      <row>
+       <entry><literal><function>pow(<replaceable>x</replaceable>, <replaceable>y</replaceable>)</function></literal></entry>
+       <entry>integer if <replaceable>x</replaceable> and <replaceable>y</replaceable> are integers and <literal><replaceable>y</replaceable> >= 0</literal>, else double</entry>
+       <entry>Numeric exponentiation</entry>
+       <entry><literal>pow(2.0, 10)</literal></entry>
+       <entry><literal>1024.0</literal></entry>
+      </row>
      </tbody>
      </tgroup>
    </table>

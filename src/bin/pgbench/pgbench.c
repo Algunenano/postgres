@@ -746,6 +746,27 @@ getPoissonRand(TState *thread, int64 center)
 	return (int64) (-log(uniform) * ((double) center) + 0.5);
 }
 
+ /*
+  * pow() for integer values with exp >= 0. Matches SQL pow() behaviour
+  */
+static int64
+ipow(int64 base, int64 exp)
+{
+	int64 result = 1;
+
+	Assert(exp >= 0);
+
+	while (exp)
+	{
+		if (exp & 1)
+			result *= base;
+		exp >>= 1;
+		base *= base;
+	}
+
+	return result;
+}
+
 /*
  * Initialize the given SimpleStats struct to all zeroes
  */
@@ -1670,6 +1691,47 @@ evalFunc(TState *thread, CState *st,
 					}
 				}
 
+				return true;
+			}
+
+		case PGBENCH_POW:
+			{
+				PgBenchValue *lval = &vargs[0];
+				PgBenchValue *rval = &vargs[1];
+
+				Assert(nargs == 2);
+
+				/*
+				 * If both operands are int and exp >= 0 use
+				 * the ipow() function, else use pow()
+				 */
+				if (lval->type == PGBT_INT &&
+					 rval->type == PGBT_INT)
+				{
+
+					int64		li,
+								ri;
+
+					if (!coerceToInt(lval, &li) ||
+						!coerceToInt(rval, &ri))
+						return false;
+
+					if (ri >= 0)
+						setIntValue(retval, ipow(li, ri));
+					else
+						setDoubleValue(retval, pow(li, ri));
+				}
+				else
+				{
+					double		ld,
+								rd;
+
+					if (!coerceToDouble(lval, &ld) ||
+						!coerceToDouble(rval, &rd))
+						return false;
+
+					setDoubleValue(retval, pow(ld, rd));
+				}
 				return true;
 			}
 
