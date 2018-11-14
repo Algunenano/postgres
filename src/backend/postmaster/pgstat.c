@@ -811,8 +811,12 @@ allow_immediate_pgstat_restart(void)
 void
 pgstat_report_stat(bool force)
 {
+#if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+	static const PgStat_TableCounts all_zeroes = { 0 };
+#else
 	/* we assume this inits to all zeroes: */
 	static const PgStat_TableCounts all_zeroes;
+#endif
 	static TimestampTz last_report = 0;
 
 	TimestampTz now;
@@ -962,8 +966,12 @@ pgstat_send_tabstat(PgStat_MsgTabstat *tsmsg)
 static void
 pgstat_send_funcstats(void)
 {
+#if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+	static const PgStat_FunctionCounts all_zeroes = { 0 };
+#else
 	/* we assume this inits to all zeroes: */
 	static const PgStat_FunctionCounts all_zeroes;
+#endif
 
 	PgStat_MsgFuncstat msg;
 	PgStat_BackendFunctionEntry *entry;
