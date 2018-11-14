@@ -160,6 +160,7 @@ main(int argc, char **argv)
 	{
 		for (i = 0; i < configdata_len; i++)
 			printf("%s = %s\n", configdata[i].name, configdata[i].setting);
+		free_configdata(configdata, configdata_len);
 		exit(0);
 	}
 
@@ -180,9 +181,12 @@ main(int argc, char **argv)
 			fprintf(stderr, _("%s: invalid argument: %s\n"),
 					progname, argv[i]);
 			advice();
+			free_configdata(configdata, configdata_len);
 			exit(1);
 		}
 	}
+
+	free_configdata(configdata, configdata_len);
 
 	return 0;
 }

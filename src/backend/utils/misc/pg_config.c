@@ -78,6 +78,7 @@ pg_config(PG_FUNCTION_ARGS)
 		tuple = BuildTupleFromCStrings(attinmeta, values);
 		tuplestore_puttuple(tupstore, tuple);
 	}
+	free_configdata(configdata, configdata_len);
 
 	/*
 	 * no longer need the tuple descriptor reference created by
