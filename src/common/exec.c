@@ -122,6 +122,9 @@ find_my_exec(const char *argv0, char *retpath)
 				test_path[MAXPGPATH] = {0};
 	char	   *path;
 
+	memset(cwd, 0, MAXPGPATH);
+	memset(test_path, 0, MAXPGPATH);
+
 	if (!getcwd(cwd, MAXPGPATH))
 	{
 		log_error(_("could not identify current directory: %s"),
