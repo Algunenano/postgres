@@ -726,6 +726,7 @@ heap_copytuple(HeapTuple tuple)
 		return NULL;
 
 	newTuple = (HeapTuple) palloc(HEAPTUPLESIZE + tuple->t_len);
+	memset(newTuple, 0, HEAPTUPLESIZE + tuple->t_len);
 	newTuple->t_len = tuple->t_len;
 	newTuple->t_self = tuple->t_self;
 	newTuple->t_tableOid = tuple->t_tableOid;

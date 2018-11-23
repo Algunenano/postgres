@@ -1390,7 +1390,7 @@ pgstat_reset_single_counter(Oid objoid, PgStat_Single_Reset_Type type)
 void
 pgstat_report_autovac(Oid dboid)
 {
-	PgStat_MsgAutovacStart msg;
+	PgStat_MsgAutovacStart msg = {0};
 
 	if (pgStatSock == PGINVALID_SOCKET)
 		return;

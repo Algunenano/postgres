@@ -5543,6 +5543,7 @@ load_relcache_init_file(bool shared)
 				goto read_failed;
 
 			rel->rd_indextuple = (HeapTuple) palloc(len);
+			memset(rel->rd_indextuple, 0, len);
 			if (fread(rel->rd_indextuple, 1, len, fp) != len)
 				goto read_failed;
 

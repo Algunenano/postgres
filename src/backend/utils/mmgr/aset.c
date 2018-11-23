@@ -475,6 +475,7 @@ AllocSetContextCreateExtended(MemoryContext parent,
 	 * the context header and its block header follows that.
 	 */
 	set = (AllocSet) malloc(firstBlockSize);
+	memset(set, 0, firstBlockSize);
 	if (set == NULL)
 	{
 		if (TopMemoryContext)
