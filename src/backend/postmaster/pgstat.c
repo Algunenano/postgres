@@ -820,8 +820,8 @@ pgstat_report_stat(bool force)
 	static TimestampTz last_report = 0;
 
 	TimestampTz now;
-	PgStat_MsgTabstat regular_msg;
-	PgStat_MsgTabstat shared_msg;
+	PgStat_MsgTabstat regular_msg = {0};
+	PgStat_MsgTabstat shared_msg = {0};
 	TabStatusArray *tsa;
 	int			i;
 

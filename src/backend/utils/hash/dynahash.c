@@ -1675,6 +1675,8 @@ element_alloc(HTAB *hashp, int nelem, int freelist_idx)
 	if (!firstElement)
 		return false;
 
+	memset(firstElement, 0, nelem * elementSize);
+
 	/* prepare to link all the new entries into the freelist */
 	prevElement = NULL;
 	tmpElement = firstElement;
