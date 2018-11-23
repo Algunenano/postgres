@@ -549,11 +549,14 @@ pclose_check(FILE *stream)
 void
 set_pglocale_pgservice(const char *argv0, const char *app)
 {
-	char		path[MAXPGPATH] = {0};
-	char		my_exec_path[MAXPGPATH] = {0};
-	char		env_path[MAXPGPATH + sizeof("PGSYSCONFDIR=")] = {0};	/* longer than
+	char		path[MAXPGPATH];
+	char		my_exec_path[MAXPGPATH];
+	char		env_path[MAXPGPATH + sizeof("PGSYSCONFDIR=")];	/* longer than
 																 * PGLOCALEDIR */
 	char	   *dup_path;
+	memset(path, 0, MAXPGPATH);
+	memset(my_exec_path, 0, MAXPGPATH);
+	memset(env_path, 0, MAXPGPATH + sizeof("PGSYSCONFDIR="));
 
 	/* don't set LC_ALL in the backend */
 	if (strcmp(app, PG_TEXTDOMAIN("postgres")) != 0)
