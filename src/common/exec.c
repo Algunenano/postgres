@@ -118,8 +118,8 @@ validate_exec(const char *path)
 int
 find_my_exec(const char *argv0, char *retpath)
 {
-	char		cwd[MAXPGPATH],
-				test_path[MAXPGPATH];
+	char		cwd[MAXPGPATH] = {0},
+				test_path[MAXPGPATH] = {0};
 	char	   *path;
 
 	if (!getcwd(cwd, MAXPGPATH))
@@ -549,9 +549,9 @@ pclose_check(FILE *stream)
 void
 set_pglocale_pgservice(const char *argv0, const char *app)
 {
-	char		path[MAXPGPATH];
-	char		my_exec_path[MAXPGPATH];
-	char		env_path[MAXPGPATH + sizeof("PGSYSCONFDIR=")];	/* longer than
+	char		path[MAXPGPATH] = {0};
+	char		my_exec_path[MAXPGPATH] = {0};
+	char		env_path[MAXPGPATH + sizeof("PGSYSCONFDIR=")] = {0};	/* longer than
 																 * PGLOCALEDIR */
 	char	   *dup_path;
 
