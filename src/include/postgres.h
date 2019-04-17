@@ -47,6 +47,8 @@
 #include "utils/elog.h"
 #include "utils/palloc.h"
 
+#include <stdalign.h>
+
 /* ----------------------------------------------------------------
  *				Section 1:	variable-length datatypes (TOAST support)
  * ----------------------------------------------------------------
@@ -139,7 +141,7 @@ typedef union
 {
 	struct						/* Normal varlena (4-byte length) */
 	{
-		uint32		va_header;
+		alignas(uint64) uint32 va_header;
 		char		va_data[FLEXIBLE_ARRAY_MEMBER];
 	}			va_4byte;
 	struct						/* Compressed-in-line format */
